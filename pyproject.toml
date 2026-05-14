@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "slide-generator"
+version = "0.1.0"
+description = "Fill PowerPoint slide templates with data to produce presentation-ready decks"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.9"
+dependencies = [
+    "python-pptx>=0.6.23",
+    "openpyxl>=3.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+]
+
+[project.scripts]
+slide-generator = "slide_generator.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["slide_generator*"]

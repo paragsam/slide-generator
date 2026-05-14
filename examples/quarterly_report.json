@@ -1,0 +1,24 @@
+{
+  "_comment": "Example 1: flat key→value placeholders. Any {{KEY}} in the template is replaced.",
+  "company": "Acme Corp",
+  "quarter": "Q1 2026",
+  "revenue": "$4.2M",
+  "growth": "+18%",
+  "gross_margin": "62%",
+
+  "_comment2": "Example 2: table-indexed data. slide1_table1 fills the first table on slide 1.",
+  "slide2_table1": [
+    ["Region",    "Revenue",  "YoY Growth"],
+    ["North",     "$1.4M",    "+22%"],
+    ["South",     "$0.9M",    "+11%"],
+    ["East",      "$1.1M",    "+19%"],
+    ["West",      "$0.8M",    "+14%"]
+  ],
+
+  "slide3_table1": [
+    ["Metric",          "Target",  "Actual"],
+    ["New Customers",   "500",     "612"],
+    ["Churn Rate",      "<5%",     "3.8%"],
+    ["NPS Score",       "60",      "67"]
+  ]
+}

@@ -5,7 +5,14 @@
       "Bash(git init *)",
       "Bash(gh repo *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(xargs -I{} git remote set-url origin \"https://paragsam:{}@github.com/paragsam/slide-generator.git\")",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Bash(command -v pip3)",
+      "Bash(python3 -m pip install --upgrade pip -q)",
+      "Bash(python3 -m pip install -e \".[dev]\" -q)",
+      "Bash(git commit *)"
     ]
   }
 }

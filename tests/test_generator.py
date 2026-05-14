@@ -10,6 +10,13 @@ from pptx.util import Inches, Pt
 from slide_generator import SlideGenerator
 
 
+def _first_table(slide):
+    for shape in slide.shapes:
+        if shape.has_table:
+            return shape.table
+    raise AssertionError("No table found on slide")
+
+
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
@@ -45,7 +52,7 @@ class TestFlatPlaceholders:
         output = gen.generate({"r1c1": "Alpha", "r1c2": "Beta"}, tmp_path / "out.pptx")
 
         prs = Presentation(str(output))
-        table = prs.slides[0].shapes[0].table
+        table = _first_table(prs.slides[0])
         assert table.cell(1, 0).text == "Alpha"
         assert table.cell(1, 1).text == "Beta"
 
@@ -58,7 +65,7 @@ class TestTableIndexedData:
         output = gen.generate(data, tmp_path / "out.pptx")
 
         prs = Presentation(str(output))
-        table = prs.slides[0].shapes[0].table
+        table = _first_table(prs.slides[0])
         assert table.cell(1, 0).text == "10"
         assert table.cell(2, 1).text == "40"
 
@@ -68,9 +75,8 @@ class TestTableIndexedData:
         output = gen.generate({"slide9_table9": [["X"]]}, tmp_path / "out.pptx")
 
         prs = Presentation(str(output))
-        table = prs.slides[0].shapes[0].table
-        # Original placeholder text should still be there (no flat replacements applied)
-        assert "r1c1" in table.cell(1, 0).text or table.cell(1, 0).text == "{{r1c1}}"
+        table = _first_table(prs.slides[0])
+        assert table.cell(1, 0).text == "{{r1c1}}"
 
 
 class TestOutputPath:

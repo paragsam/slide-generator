@@ -46,23 +46,23 @@ DATA = {
     #                  Engagement Rate
     "slide1": {
         "reach": {
-            "cost":              "$242,477.98",
-            "impressions":       "29,435,586",
-            "cpm":               "$8.24",
-            "reach":             "6,956,446",
-            "clicks":            "70,372",
+            "cost":              "$222,222.22",
+            "impressions":       "33,333,333",
+            "cpm":               "$4.44",
+            "reach":             "5,555,555",
+            "clicks":            "66,666",
             "ctr":               above_benchmark("0.24%"),
-            "cpc":               "$3.45",
+            "cpc":               "$7.77",
             "vtr":               above_benchmark("1.18%"),
             "vtr_6sec":          above_benchmark("2.09%"),
             "engagement_rate":   above_benchmark("0.39%"),
         },
         "top_feed": {
-            "cost":              "$26,089.81",
-            "impressions":       "4,899,506",
+            "cost":              "$88,888.88",
+            "impressions":       "9,999,999",
             "cpm":               above_benchmark("$5.32"),
-            "reach":             "1,031,565",
-            "clicks":            "12,606",
+            "reach":             "1,111,111",
+            "clicks":            "22,222",
             "ctr":               above_benchmark("0.26%"),
             "cpc":               above_benchmark("$2.07"),
             "vtr":               "0.60%",
@@ -70,10 +70,10 @@ DATA = {
             "engagement_rate":   above_benchmark("0.37%"),
         },
         "pulse_premiere": {
-            "cost":              "$99,256.56",
-            "impressions":       "3,308,553",
-            "cpm":               "$30.00",
-            "reach":             "1,453,696",
+            "cost":              "$33,333.33",
+            "impressions":       "4,444,444",
+            "cpm":               "$50.00",
+            "reach":             "1,000,666",
             "clicks":            "7,314",
             "ctr":               "0.22%",
             "cpc":               "$13.57",
@@ -88,7 +88,7 @@ DATA = {
     "slide2": {
         "creatives": [
             {
-                "name":        "GREEN_PRODUCT_LANDO_VIDEO_15S",
+                "name":        "PRODUCT_THREE_VIDEO_15S",
                 "cost":        "$157,346.85",
                 "impressions": "21,898,963",
                 "cpm":         "$7.19",
@@ -99,7 +99,7 @@ DATA = {
                 "er":          above_benchmark("0.38%"),
             },
             {
-                "name":        "GREEN_PRODUCT_LANDO_VIDEO_6S",
+                "name":        "PRODUCT_FOUR_VIDEO_6S",
                 "cost":        "$111,220.94",
                 "impressions": "12,436,129",
                 "cpm":         "$8.94",
@@ -110,7 +110,7 @@ DATA = {
                 "er":          above_benchmark("0.41%"),
             },
             {
-                "name":        "GREEN_LIFESTYLE_4WHEEL_LANDO_VIDEO_15S",
+                "name":        "PRODUCT_NEW_VIDEO_15S",
                 "cost":        "$99,256.56",
                 "impressions": "3,308,553",
                 "cpm":         "$30.00",
@@ -165,12 +165,10 @@ def _write_cell(cell, entry) -> None:
         run.font.bold = True
         run.font.color.rgb = GREEN
     else:
-        run.font.bold = None          # inherit from cell/table style
-        # Remove any explicit solidFill so the cell inherits its theme color
-        rPr = run._r.get_or_add_rPr()
-        solidFill = rPr.find(qn("a:solidFill"))
-        if solidFill is not None:
-            rPr.remove(solidFill)
+        run.font.bold = None
+        # Always write explicit white — some template cells use <schemeClr val="lt1"/>
+        # which becomes invisible if the solidFill element is removed rather than replaced.
+        run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
 
 
 # ---------------------------------------------------------------------------
